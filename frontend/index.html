@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gesCasesRurals | Gestión de Reservas Rurales</title>
+  <meta name="description" content="Plataforma premium para reservas y gestión de 6 exclusivas casas rurales.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/casas.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="/css/panel.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Glassmorphism Navigation Bar -->
+  <header class="navbar-header">
+    <div class="container navbar-container">
+      <a href="#/" class="logo">
+        <i class="fa-solid fa-house-chimney-window"></i> gesCasesRurals
+      </a>
+      
+      <!-- Nav Menu Links -->
+      <nav class="nav-menu" id="nav-links">
+        <a href="#/" class="nav-link active" data-route="home">Inicio</a>
+        <a href="#/casas" class="nav-link" data-route="casas">Casas Rurales</a>
+      </nav>
+      
+      <!-- User Profile and Actions -->
+      <div class="nav-auth">
+        <!-- Notification Dropdown -->
+        <div class="notif-bell-container hidden" id="notif-container">
+          <button class="notif-bell" id="notif-bell-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notif-badge hidden" id="notif-count-badge">0</span>
+          </button>
+          
+          <div class="notif-dropdown" id="notif-dropdown-menu">
+            <div class="notif-header">
+              <h4>Notificaciones</h4>
+              <button class="btn btn-secondary admin-btn-sm" id="notif-mark-all-btn" style="padding: 2px 8px; font-size: 0.75rem;">Marcar leídas</button>
+            </div>
+            <div class="notif-list" id="notif-list-items">
+              <!-- Dynamically populated -->
+              <div class="notif-empty">No tienes nuevas notificaciones</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auth Buttons (Login/Signup or Profile) -->
+        <div id="auth-buttons-container">
+          <!-- Unauthenticated -->
+          <div class="d-flex gap-2" id="guest-buttons">
+            <a href="#/login" class="btn btn-secondary">Ingresar</a>
+            <a href="#/registro" class="btn btn-primary">Registrarse</a>
+          </div>
+          
+          <!-- Authenticated User Dropdown -->
+          <div class="user-menu-container hidden" id="user-dropdown-container">
+            <div class="user-profile-badge" id="user-profile-toggle">
+              <div class="user-avatar" id="user-avatar-initials">U</div>
+              <span id="user-display-name" style="font-weight: 500; font-size: 0.9rem;">Usuario</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; opacity: 0.7;"></i>
+            </div>
+            
+            <div class="dropdown-menu" id="user-dropdown-menu">
+              <a href="#/panel" class="dropdown-item" id="menu-item-panel">
+                <i class="fa-solid fa-user-gear"></i> Mi Panel de Reservas
+              </a>
+              <a href="#/admin" class="dropdown-item hidden" id="menu-item-admin">
+                <i class="fa-solid fa-chart-line"></i> Dashboard Admin
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" id="logout-btn" style="width:100%; border:none; text-align:left; background:none;">
+                <i class="fa-solid fa-right-from-bracket" style="color:var(--danger);"></i> Cerrar Sesión
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile Menu Burger -->
+        <button class="mobile-menu-toggle" id="mobile-menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Main Content Window -->
+  <main id="app-content">
+    <!-- Views will be dynamically loaded here by router.js -->
+    <div style="display: flex; justify-content: center; align-items: center; height: 60vh;">
+      <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
+    </div>
+  </main>
+
+  <!-- Toast Notification Area -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <h4 class="logo" style="color:#ffffff; margin-bottom: 20px; font-size: 1.4rem;">
+          <i class="fa-solid fa-house-chimney-window" style="color:var(--accent);"></i> gesCasesRurals
+        </h4>
+        <p>Ofrecemos estancias inigualables en las mejores casas rurales de la provincia. Reservas seguras, entornos naturales y atención personalizada de alta calidad.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Nuestras Casas</h4>
+        <div class="footer-links">
+          <a href="#/casas" class="footer-link">Can Noguer</a>
+          <a href="#/casas" class="footer-link">Can Alzina</a>
+          <a href="#/casas" class="footer-link">Can Puigdomènech</a>
+          <a href="#/casas" class="footer-link">Can Roure</a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <div class="footer-links">
+          <a href="#/" class="footer-link">Inicio</a>
+          <a href="#/casas" class="footer-link">Catálogo</a>
+          <a href="#/login" class="footer-link">Iniciar Sesión</a>
+          <a href="#/registro" class="footer-link">Registro</a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-links" style="gap: 16px;">
+          <div class="footer-link" style="display:flex; gap: 10px; align-items:center;">
+            <i class="fa-solid fa-phone" style="color:var(--accent);"></i> 972 123 456
+          </div>
+          <div class="footer-link" style="display:flex; gap: 10px; align-items:center;">
+            <i class="fa-solid fa-envelope" style="color:var(--accent);"></i> reservas@gescasesrurals.com
+          </div>
+          <div class="footer-link" style="display:flex; gap: 10px; align-items:center;">
+            <i class="fa-solid fa-location-dot" style="color:var(--accent);"></i> Girona, Catalunya, España
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 gesCasesRurals. Todos los derechos reservados. Desarrollado por Antigravity.</p>
+    </div>
+  </footer>
+
+  <!-- App Core JS Modules -->
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/home.js"></script>
+  <script src="/js/casas.js"></script>
+  <script src="/js/reservas.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="/js/calendario.js"></script>
+  <script src="/js/router.js"></script>
+</body>
+</html>

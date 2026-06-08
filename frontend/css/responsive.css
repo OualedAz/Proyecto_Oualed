@@ -1,0 +1,120 @@
+/* ============================================================
+   gesCasesRurals - Mobile Responsive Overrides
+   ============================================================ */
+
+/* Mobile Menu Toggle Button (hidden by default) */
+.mobile-menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-sidebar {
+    position: static;
+    margin-bottom: 30px;
+  }
+  
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .booking-widget {
+    position: static;
+    margin-top: 30px;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Header & Navigation */
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--card-bg);
+    flex-direction: column;
+    padding: 40px 24px;
+    gap: 24px;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-normal);
+    z-index: 100;
+  }
+  
+  .nav-menu.show {
+    left: 0;
+  }
+  
+  /* Hero section typography */
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+  }
+  
+  /* Grids */
+  .featured-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .search-form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  /* Admin Layout */
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .admin-sidebar {
+    display: none; /* Can toggle in JS */
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .my-booking-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .my-booking-img {
+    height: 180px;
+  }
+  
+  .my-booking-actions {
+    align-items: center;
+  }
+  
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

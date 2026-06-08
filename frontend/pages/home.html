@@ -1,0 +1,172 @@
+<!-- Hero Banner -->
+<section class="hero-section">
+  <div class="container hero-content">
+    <span class="hero-subtitle">Naturaleza & Confort</span>
+    <h1 class="hero-title">El Refugio Perfecto para tus Escapadas</h1>
+    <p class="hero-description">Descubre nuestras 6 exclusivas masías y casas rurales completamente equipadas en entornos naturales inigualables. Tu desconexión soñada empieza aquí.</p>
+    <div class="hero-buttons">
+      <a href="#/casas" class="btn btn-accent">Explorar Casas Rurales</a>
+      <a href="#/registro" class="btn btn-secondary" style="color:white; border-color:rgba(255,255,255,0.4)">Registrarse</a>
+    </div>
+  </div>
+</section>
+
+<!-- Search Widget (Float Overlay) -->
+<div class="container">
+  <div class="search-panel">
+    <form class="search-form" id="quick-search-form" onsubmit="event.preventDefault();">
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" for="search-casa"><i class="fa-solid fa-map-location-dot"></i> ¿Dónde quieres ir?</label>
+        <select class="form-control" id="search-casa">
+          <option value="all">Todas las casas rurales</option>
+          <option value="1">Can Noguer</option>
+          <option value="2">Can Alzina</option>
+          <option value="3">Can Puigdomènech</option>
+          <option value="4">Can Roure</option>
+          <option value="5">Can Oliveres</option>
+          <option value="6">La Barraca del Riu</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" for="search-entrada"><i class="fa-solid fa-calendar-check"></i> Entrada</label>
+        <input type="date" class="form-control" id="search-entrada">
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" for="search-salida"><i class="fa-solid fa-calendar-xmark"></i> Salida</label>
+        <input type="date" class="form-control" id="search-salida">
+      </div>
+      <button type="submit" class="btn btn-primary" id="quick-search-submit" style="width: 100%;">
+        <i class="fa-solid fa-magnifying-glass"></i> Buscar
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Featured Houses Grid Section -->
+<section class="section-padding container">
+  <h2 class="section-title">Nuestras Casas Rurales</h2>
+  <p class="section-subtitle">Selecciona una de nuestras 6 exclusivas propiedades para vivir una experiencia inolvidable. Cada una con su propia personalidad y comodidades.</p>
+  
+  <div class="featured-grid" id="featured-houses-list">
+    <!-- Populated dynamically via JS -->
+    <div style="grid-column: span 3; text-align: center; padding: 40px;">
+      <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section-padding" style="background-color: var(--border-color); margin-top: 40px;">
+  <div class="container">
+    <h2 class="section-title">La Opinión de Nuestros Huéspedes</h2>
+    <p class="section-subtitle">Clientes reales que han disfrutado del descanso y la belleza natural en gesCasesRurals.</p>
+    
+    <div class="testimonials-grid">
+      <!-- Card 1 -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p class="testimonial-quote">"Pasamos un fin de semana increíble en Can Puigdomènech. La casa señorial es una maravilla, muy limpia, la piscina fantástica y el trato de Jordi insuperable."</p>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar" style="background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">RG</div>
+          <div class="testimonial-info">
+            <h5>Ramón Guitart</h5>
+            <span>Estancia en Can Puigdomènech</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p class="testimonial-quote">"La Barraca del Riu es un rincón mágico. Desconexión absoluta con el río al lado. Ideal para relajarse y respirar aire puro. Repetiremos seguro."</p>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar" style="background-color: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">MC</div>
+          <div class="testimonial-info">
+            <h5>Marta Casals</h5>
+            <span>Estancia en La Barraca del Riu</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+        </div>
+        <p class="testimonial-quote">"Buscábamos paz y Can Noguer cumplió todas las expectativas. El jardín y la barbacoa dieron mucho juego, y los niños disfrutaron de los caminos forestales."</p>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar" style="background-color: var(--text-muted); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">SF</div>
+          <div class="testimonial-info">
+            <h5>Sílvia Fuster</h5>
+            <span>Estancia en Can Noguer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="section-padding container">
+  <h2 class="section-title">¿Tienes Alguna Pregunta?</h2>
+  <p class="section-subtitle">Escríbenos si deseas reservar un evento especial, coordinar necesidades personalizadas o resolver dudas.</p>
+  
+  <div class="contact-layout">
+    <div class="contact-info-card">
+      <div>
+        <h3>Información de Contacto</h3>
+        <p style="margin-top: 10px; color: rgba(255,255,255,0.7);">Nuestro equipo administrativo te responderá en menos de 24 horas laborables.</p>
+      </div>
+      
+      <div class="contact-info-list">
+        <div class="contact-info-item">
+          <i class="fa-solid fa-phone"></i>
+          <div>
+            <h5>Llámanos</h5>
+            <p>+34 972 123 456</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <i class="fa-solid fa-envelope"></i>
+          <div>
+            <h5>Correo Electrónico</h5>
+            <p>info@gescasesrurals.com</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <div>
+            <h5>Nuestra Oficina</h5>
+            <p>Carrer de la Rutlla, 12, 17002 Girona</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">
+        Horario: Lunes a Viernes de 09:00 a 19:00
+      </div>
+    </div>
+    
+    <div class="contact-form-card">
+      <form id="contact-feedback-form">
+        <div class="form-group">
+          <label class="form-label" for="contact-name">Nombre Completo</label>
+          <input type="text" class="form-control" id="contact-name" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="contact-email">Correo Electrónico</label>
+          <input type="email" class="form-control" id="contact-email" placeholder="correo@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="contact-message">Mensaje</label>
+          <textarea class="form-control form-textarea" id="contact-message" placeholder="¿En qué te podemos ayudar?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>

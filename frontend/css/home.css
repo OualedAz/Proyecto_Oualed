@@ -1,0 +1,192 @@
+/* ============================================================
+   gesCasesRurals - Home Page CSS
+   ============================================================ */
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 80vh;
+  min-height: 550px;
+  background: linear-gradient(135deg, rgba(34, 76, 70, 0.8), rgba(26, 34, 31, 0.9)), 
+              url('/assets/img/hero-bg.webp') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+  animation: fadeInDown 0.8s ease forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-weight: 800;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+/* Quick Search Panel (Cozy overlap below hero) */
+.search-panel {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 32px;
+  margin-top: -60px;
+  position: relative;
+  z-index: 10;
+  border: 1px solid var(--border-color);
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+/* Featured Section */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Testimonials Carousel / Grid */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.testimonial-card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+
+.testimonial-stars {
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.testimonial-quote {
+  color: var(--text-main);
+  font-style: italic;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.testimonial-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  background-size: cover;
+  background-position: center;
+}
+
+.testimonial-info h5 {
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.testimonial-info span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Contact Info Section */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 50px;
+}
+
+.contact-info-card {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 40px 0;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-info-item i {
+  color: var(--accent);
+  font-size: 1.25rem;
+  margin-top: 4px;
+}
+
+.contact-info-item div h5 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.contact-info-item div p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.contact-form-card {
+  background-color: var(--card-bg);
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}

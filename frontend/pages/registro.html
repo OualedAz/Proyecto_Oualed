@@ -1,0 +1,55 @@
+<div class="auth-page-wrapper">
+  <div class="auth-card" style="max-width: 550px;">
+    <div class="auth-header">
+      <h2>Crear una Cuenta</h2>
+      <p>Regístrate para reservar y gestionar tus estancias rurales</p>
+    </div>
+    
+    <!-- Error alert banner -->
+    <div class="auth-error-banner" id="register-error-banner">
+      Ocurrió un error. Comprueba los campos indicados.
+    </div>
+    
+    <form id="register-form">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="register-name">Nombre</label>
+          <input type="text" class="form-control" id="register-name" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-apellidos">Apellidos</label>
+          <input type="text" class="form-control" id="register-apellidos" placeholder="Tus apellidos" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="register-email">Correo Electrónico</label>
+        <input type="email" class="form-control" id="register-email" placeholder="correo@ejemplo.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="register-telefono">Teléfono de Contacto</label>
+        <input type="tel" class="form-control" id="register-telefono" placeholder="Ej: 600111222">
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="register-password">Contraseña</label>
+          <input type="password" class="form-control" id="register-password" placeholder="Mín. 6 caracteres" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-confirm-password">Confirmar Contraseña</label>
+          <input type="password" class="form-control" id="register-confirm-password" placeholder="Confirmar" required>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary auth-submit-btn" id="register-submit-btn" style="margin-top: 10px;">
+        <i class="fa-solid fa-user-plus"></i> Registrarse
+      </button>
+    </form>
+    
+    <div class="auth-footer">
+      ¿Ya tienes una cuenta? <a href="#/login">Inicia sesión aquí</a>
+    </div>
+  </div>
+</div>

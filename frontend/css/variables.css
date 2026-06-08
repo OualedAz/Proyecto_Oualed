@@ -1,0 +1,75 @@
+/* ============================================================
+   gesCasesRurals - CSS Variables & Design Tokens
+   ============================================================ */
+
+:root {
+  /* Color Palette - HSL (Cozy Warm Rural & Premium Teal) */
+  --primary-h: 172;
+  --primary-s: 50%;
+  --primary-l: 25%;
+  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l)); /* Dark Forest/Teal */
+  --primary-light: hsl(var(--primary-h), var(--primary-s), 45%);
+  --primary-dark: hsl(var(--primary-h), var(--primary-s), 15%);
+  
+  --accent-h: 28;
+  --accent-s: 85%;
+  --accent-l: 55%;
+  --accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l)); /* Vibrant Warm Orange/Amber */
+  --accent-light: hsl(var(--accent-h), var(--accent-s), 65%);
+  --accent-dark: hsl(var(--accent-h), var(--accent-s), 40%);
+
+  /* Neutrals */
+  --bg-color: #fdfcf9; /* Off-white warm page bg */
+  --card-bg: #ffffff;
+  --text-main: #2b3532; /* Dark slate */
+  --text-muted: #667570;
+  --border-color: #e5eae8;
+  
+  /* Status Colors */
+  --success: #2e7d32;
+  --success-light: #e8f5e9;
+  --warning: #f57c00;
+  --warning-light: #fff3e0;
+  --danger: #d32f2f;
+  --danger-light: #ffebee;
+  --info: #0288d1;
+  --info-light: #e1f5fe;
+
+  /* Typography */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(43, 53, 50, 0.05);
+  --shadow-md: 0 8px 16px rgba(43, 53, 50, 0.08);
+  --shadow-lg: 0 16px 32px rgba(43, 53, 50, 0.12);
+  --shadow-flat: 0 4px 0 var(--border-color);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Borders */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  /* Layout */
+  --max-width: 1200px;
+  --header-height: 80px;
+}
+
+/* Dark Mode Overrides (if user toggles or systems preference) */
+[data-theme="dark"] {
+  --bg-color: #121816;
+  --card-bg: #1a221f;
+  --text-main: #e2e8e6;
+  --text-muted: #94a39f;
+  --border-color: #2b3733;
+  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.4);
+}

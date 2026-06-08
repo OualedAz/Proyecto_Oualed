@@ -1,0 +1,458 @@
+<div class="admin-layout" id="admin-page-container">
+  
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-menu">
+      <div class="admin-sidebar-item active" data-view="stats">
+        <i class="fa-solid fa-chart-pie"></i> Resumen General
+      </div>
+      <div class="admin-sidebar-item" data-view="calendar">
+        <i class="fa-solid fa-calendar-days"></i> Calendario de Ocupación
+      </div>
+      <div class="admin-sidebar-item" data-view="reservas">
+        <i class="fa-solid fa-book-bookmark"></i> Gestionar Reservas
+      </div>
+      <div class="admin-sidebar-item" data-view="casas">
+        <i class="fa-solid fa-house-chimney"></i> Gestionar Casas
+      </div>
+      <div class="admin-sidebar-item" data-view="usuarios">
+        <i class="fa-solid fa-users"></i> Gestionar Usuarios
+      </div>
+      <div class="admin-sidebar-item" data-view="logs">
+        <i class="fa-solid fa-list-check"></i> Logs de Auditoría
+      </div>
+    </div>
+    
+    <div style="padding: 0 28px; font-size: 0.8rem; opacity: 0.5;">
+      gesCasesRurals v1.0
+    </div>
+  </aside>
+  
+  <!-- Main content views -->
+  <main class="admin-content" id="admin-view-content">
+    
+    <!-- Loading spinner placeholder -->
+    <div id="admin-view-loading" style="display:flex; justify-content:center; align-items:center; height:50vh;">
+      <i class="fa-solid fa-circle-notch fa-spin" style="font-size:3rem; color:var(--primary);"></i>
+    </div>
+
+    <!-- ==============================================
+         VIEW 1: stats (Resumen General)
+         ============================================== -->
+    <div class="hidden" id="admin-subview-stats">
+      <div class="admin-content-header">
+        <h2 class="admin-content-title">Resumen de Operaciones</h2>
+        <span style="font-size: 0.9rem; color: var(--text-muted);" id="stats-current-date">Hoy</span>
+      </div>
+      
+      <!-- KPI cards grid -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon revenue"><i class="fa-solid fa-euro-sign"></i></div>
+          <div class="admin-stat-info">
+            <h4>Ingresos Totales</h4>
+            <div class="admin-stat-val" id="kpi-revenue">0.00€</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon bookings"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="admin-stat-info">
+            <h4>Reservas Aceptadas</h4>
+            <div class="admin-stat-val" id="kpi-bookings-accepted">0</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon houses"><i class="fa-solid fa-house-circle-check"></i></div>
+          <div class="admin-stat-info">
+            <h4>Casas Activas</h4>
+            <div class="admin-stat-val" id="kpi-houses-active">6/6</div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon users"><i class="fa-solid fa-user-tag"></i></div>
+          <div class="admin-stat-info">
+            <h4>Clientes Totales</h4>
+            <div class="admin-stat-val" id="kpi-users-total">0</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recent tables layout -->
+      <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap: 30px;">
+        <!-- Recent Reservations -->
+        <div class="admin-table-container" style="margin-bottom:0;">
+          <div class="admin-table-header">
+            <h3>Reservas Recientes</h3>
+            <button class="btn btn-secondary admin-btn-sm" onclick="document.querySelector('[data-view=reservas]').click();">Ver todas</button>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Casa</th>
+                  <th>Fechas</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="table-recent-reservations">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Recent Activity Logs -->
+        <div class="admin-table-container" style="margin-bottom:0;">
+          <div class="admin-table-header">
+            <h3>Actividad de Administradores</h3>
+            <button class="btn btn-secondary admin-btn-sm" onclick="document.querySelector('[data-view=logs]').click();">Ver logs</button>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Acción</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody id="table-recent-logs" style="font-size: 0.85rem;">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         VIEW 2: calendar (Calendario de Ocupación)
+         ============================================== -->
+    <div class="hidden" id="admin-subview-calendar">
+      <div class="admin-content-header">
+        <h2 class="admin-content-title">Calendario de Ocupación</h2>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Reservas de las 6 casas rurales representadas de forma mensual.</p>
+      </div>
+      
+      <div class="admin-scheduler-card">
+        <div class="scheduler-controls">
+          <div class="scheduler-nav">
+            <button class="btn btn-secondary" id="scheduler-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <span class="scheduler-month-title" id="scheduler-month-label">Junio 2026</span>
+            <button class="btn btn-secondary" id="scheduler-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <button class="btn btn-primary" id="scheduler-refresh-btn"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+        </div>
+        
+        <div class="scheduler-grid-container">
+          <table class="scheduler-table">
+            <thead>
+              <tr id="scheduler-thead-days">
+                <th class="house-col">Casa Rural</th>
+                <!-- Dynamically generated days -->
+              </tr>
+            </thead>
+            <tbody id="scheduler-tbody-houses">
+              <!-- Dynamically generated house rows -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="scheduler-legend">
+          <div class="scheduler-legend-item">
+            <div class="scheduler-legend-box free"></div>
+            <span>Libre / Disponible</span>
+          </div>
+          <div class="scheduler-legend-item">
+            <div class="scheduler-legend-box occupied"></div>
+            <span>Ocupado (Reserva Aceptada)</span>
+          </div>
+          <div class="scheduler-legend-item">
+            <div class="scheduler-legend-box weekend"></div>
+            <span>Fin de Semana</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         VIEW 3: reservas (Gestionar Reservas)
+         ============================================== -->
+    <div class="hidden" id="admin-subview-reservas">
+      <div class="admin-content-header">
+        <h2 class="admin-content-title">Administración de Reservas</h2>
+      </div>
+      
+      <div class="admin-table-container">
+        <div class="admin-table-header">
+          <h3>Listado Completo de Solicitudes</h3>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table" id="admin-reservas-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Casa</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+                <th>Personas</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="table-admin-reservas">
+              <!-- Filled via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         VIEW 4: casas (Gestionar Casas)
+         ============================================== -->
+    <div class="hidden" id="admin-subview-casas">
+      <div class="admin-content-header">
+        <h2 class="admin-content-title">Catálogo de Propiedades</h2>
+        <button class="btn btn-primary" id="admin-add-casa-btn"><i class="fa-solid fa-plus"></i> Nueva Casa Rural</button>
+      </div>
+      
+      <div class="admin-table-container">
+        <div class="admin-table-header">
+          <h3>Casas Registradas en el Sistema</h3>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Capacidad</th>
+                <th>Precio/Noche</th>
+                <th>Hab / Baños</th>
+                <th>Tamaño</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="table-admin-casas">
+              <!-- Filled via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         VIEW 5: usuarios (Gestionar Usuarios)
+         ============================================== -->
+    <div class="hidden" id="admin-subview-usuarios">
+      <div class="admin-content-header">
+        <h2 class="admin-content-title">Gestión de Clientes y Personal</h2>
+      </div>
+      
+      <div class="admin-table-container">
+        <div class="admin-table-header">
+          <h3>Usuarios Registrados</h3>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="table-admin-usuarios">
+              <!-- Filled via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         VIEW 6: logs (Logs de Auditoría)
+         ============================================== -->
+    <div class="hidden" id="admin-subview-logs">
+      <div class="admin-content-header">
+        <h2 class="admin-content-title">Registro de Auditoría</h2>
+      </div>
+      
+      <div class="admin-table-container">
+        <div class="admin-table-header">
+          <h3>Historial de Acciones de Administración</h3>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Administrador</th>
+                <th>Acción</th>
+                <th>Tabla Afectada</th>
+                <th>Registro ID</th>
+                <th>Fecha</th>
+                <th>IP</th>
+              </tr>
+            </thead>
+            <tbody id="table-admin-logs" style="font-size:0.85rem;">
+              <!-- Filled via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+  </main>
+</div>
+
+<!-- ============================================================
+     ADMIN MODALS
+     ============================================================ -->
+
+<!-- Modal: Booking Details (Show observations and management buttons) -->
+<div class="modal-overlay" id="admin-booking-modal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 class="modal-title">Detalles de Reserva</h3>
+      <button class="modal-close-btn" id="admin-booking-modal-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="profile-security-info" style="margin-bottom:20px; background-color:var(--bg-color);">
+        <h4 style="margin-bottom:8px;" id="admin-modal-book-house">Can Puigdomènech</h4>
+        <p id="admin-modal-book-dates" style="font-weight:600; color:var(--text-main);"><i class="fa-solid fa-calendar"></i> 10/06/2026 - 15/06/2026</p>
+      </div>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+        <div>
+          <label class="form-label">Cliente</label>
+          <p id="admin-modal-book-user">Joan Garcia</p>
+        </div>
+        <div>
+          <label class="form-label">Contacto</label>
+          <p id="admin-modal-book-contact">600111222 | joan@email.com</p>
+        </div>
+      </div>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+        <div>
+          <label class="form-label">Personas</label>
+          <p id="admin-modal-book-guests">5 personas</p>
+        </div>
+        <div>
+          <label class="form-label">Importe Total</label>
+          <p id="admin-modal-book-price" style="font-weight:700; color:var(--primary); font-size:1.1rem;">425.00€</p>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Observaciones del Cliente</label>
+        <p id="admin-modal-book-obs" style="font-style:italic; color:var(--text-muted); background:var(--bg-color); padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">Ninguna</p>
+      </div>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+        <div>
+          <label class="form-label">Fecha Solicitud</label>
+          <p id="admin-modal-book-created">01/06/2026</p>
+        </div>
+        <div>
+          <label class="form-label">Estado Actual</label>
+          <span class="status-tag pendiente" id="admin-modal-book-status">Pendiente</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" id="admin-booking-modal-footer">
+      <!-- Buttons injected by JS based on state -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal: House Edit / Creation Form -->
+<div class="modal-overlay" id="admin-house-modal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 class="modal-title" id="admin-house-modal-title">Editar Casa Rural</h3>
+      <button class="modal-close-btn" id="admin-house-modal-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="admin-house-form">
+      <input type="hidden" id="admin-house-id">
+      
+      <div class="modal-body">
+        <div class="auth-error-banner" id="admin-house-error-banner"></div>
+        
+        <div class="form-group">
+          <label class="form-label" for="house-name">Nombre de la Casa</label>
+          <input type="text" class="form-control" id="house-name" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="house-description">Descripción</label>
+          <textarea class="form-control form-textarea" id="house-description" required style="min-height: 80px;"></textarea>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label class="form-label" for="house-capacidad">Capacidad Máxima</label>
+            <input type="number" class="form-control" id="house-capacidad" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="house-precio">Precio por Noche (€)</label>
+            <input type="number" class="form-control" id="house-precio" min="1" step="0.01" required>
+          </div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label class="form-label" for="house-rooms">Habitaciones</label>
+            <input type="number" class="form-control" id="house-rooms" min="1" value="2">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="house-baths">Baños</label>
+            <input type="number" class="form-control" id="house-baths" min="1" value="1">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="house-meters">Metros (m²)</label>
+            <input type="number" class="form-control" id="house-meters" min="10">
+          </div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label class="form-label" for="house-services">Servicios (Separados por comas)</label>
+            <input type="text" class="form-control" id="house-services" placeholder="WiFi, Barbacoa, Piscina">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="house-status">Estado</label>
+            <select class="form-control" id="house-status">
+              <option value="activa">Activa</option>
+              <option value="inactiva">Inactiva</option>
+              <option value="mantenimiento">Mantenimiento</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Image upload container (Only for Editing) -->
+        <div class="form-group" id="house-image-upload-section">
+          <label class="form-label"><i class="fa-solid fa-images"></i> Cargar Imágenes de la Propiedad</label>
+          <input type="file" class="form-control" id="house-image-files" multiple accept="image/*" style="padding: 8px;">
+          <small class="form-label" style="font-weight:400; color:var(--text-muted); margin-top:4px;">Puedes elegir hasta 5 fotos en formato PNG, JPG o WEBP.</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="admin-house-cancel-btn">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="admin-house-submit-btn">Guardar Propiedad</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="container section-padding" id="detail-loading-state" style="text-align: center; padding: 100px 0;">
+  <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
+  <p style="margin-top: 16px; color: var(--text-muted);">Cargando detalles de la propiedad...</p>
+</div>
+
+<div class="container section-padding hidden" id="detail-content-wrapper">
+  <!-- Back button -->
+  <a href="#/casas" class="btn btn-secondary" style="margin-bottom: 30px; display:inline-flex; align-items:center; gap:8px;">
+    <i class="fa-solid fa-arrow-left"></i> Volver al Catálogo
+  </a>
+  
+  <div class="detail-layout">
+    <!-- Main content details -->
+    <article>
+      <!-- Title -->
+      <h1 class="detail-title" id="detail-name">Cargando...</h1>
+      <div class="house-card-specs" style="border:none; padding-top:0; margin-bottom: 24px; font-size: 1rem;">
+        <span class="house-card-spec-item"><i class="fa-solid fa-user-group"></i> <span id="detail-spec-cap">6</span> personas máx</span>
+        <span class="house-card-spec-item"><i class="fa-solid fa-bed"></i> <span id="detail-spec-rooms">3</span> hab.</span>
+        <span class="house-card-spec-item"><i class="fa-solid fa-bath"></i> <span id="detail-spec-baths">2</span> baños</span>
+        <span class="house-card-spec-item" id="detail-spec-meters-span"><i class="fa-solid fa-ruler-combined"></i> <span id="detail-spec-meters">130</span> m²</span>
+      </div>
+      
+      <!-- Gallery Grid -->
+      <div class="detail-gallery">
+        <div class="gallery-main">
+          <img src="" id="detail-gallery-main-img" alt="Vista Principal">
+        </div>
+        <!-- Thumbnails -->
+        <div class="gallery-thumb active" data-index="0" id="detail-thumb-0"><img src="" alt="Miniatura"></div>
+        <div class="gallery-thumb" data-index="1" id="detail-thumb-1"><img src="" alt="Miniatura"></div>
+        <div class="gallery-thumb" data-index="2" id="detail-thumb-2"><img src="" alt="Miniatura"></div>
+        <div class="gallery-thumb" data-index="3" id="detail-thumb-3"><img src="" alt="Miniatura"></div>
+      </div>
+      
+      <!-- Description -->
+      <h3 style="color:var(--primary); margin-bottom: 12px; font-size:1.4rem;">Descripción</h3>
+      <p class="detail-description" id="detail-description">Cargando...</p>
+      
+      <!-- Amenities list -->
+      <h3 style="color:var(--primary); margin-bottom: 16px; font-size:1.4rem; border-top:1px solid var(--border-color); padding-top:24px;">Servicios Disponibles</h3>
+      <div class="services-list" id="detail-services-list">
+        <!-- Dynamically populated -->
+      </div>
+    </article>
+    
+    <!-- Booking form widget -->
+    <aside>
+      <div class="booking-widget">
+        <div class="booking-widget-header">
+          <div>
+            <span class="booking-widget-price" id="detail-widget-price">0.00€</span>
+            <span>/ noche</span>
+          </div>
+          <span class="status-tag disponible" style="background-color: var(--success-light); color: var(--success);">Disponible</span>
+        </div>
+        
+        <!-- Booking form -->
+        <form id="booking-form">
+          <div class="form-group">
+            <label class="form-label" for="booking-entrada"><i class="fa-solid fa-calendar-check"></i> Fecha de Entrada</label>
+            <input type="date" class="form-control" id="booking-entrada" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-salida"><i class="fa-solid fa-calendar-xmark"></i> Fecha de Salida</label>
+            <input type="date" class="form-control" id="booking-salida" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-guests"><i class="fa-solid fa-user-group"></i> Huéspedes</label>
+            <select class="form-control" id="booking-guests" required>
+              <!-- Filled by JS according to house capacity -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-observaciones"><i class="fa-solid fa-comment-dots"></i> Peticiones Especiales (Opcional)</label>
+            <textarea class="form-control form-textarea" id="booking-observaciones" placeholder="Ej: cuna para bebé, check-in tardío, etc." style="min-height: 80px;"></textarea>
+          </div>
+          
+          <!-- Price breakdown details -->
+          <div class="booking-breakdown hidden" id="booking-price-breakdown">
+            <div class="breakdown-row">
+              <span id="breakdown-label-nights">0.00€ x 0 noches</span>
+              <span id="breakdown-val-nights">0.00€</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Gastos de gestión</span>
+              <span>0.00€ (Gratis)</span>
+            </div>
+            <div class="breakdown-row total">
+              <span>Total estimado</span>
+              <span id="breakdown-val-total">0.00€</span>
+            </div>
+          </div>
+          
+          <div class="auth-error-banner" id="booking-error-banner" style="margin-top: 10px; margin-bottom: 10px;"></div>
+
+          <!-- Submit buttons -->
+          <button type="submit" class="btn btn-accent btn-primary" id="booking-submit-btn" style="width: 100%; margin-top: 12px;" disabled>
+            Reservar Alojamiento
+          </button>
+          
+          <p id="booking-widget-prompt-login" style="margin-top:14px; font-size:0.85rem; text-align:center; color:var(--text-muted);">
+            Debes <a href="#/login" style="color:var(--accent-dark); font-weight:600;">iniciar sesión</a> para realizar una reserva.
+          </p>
+        </form>
+      </div>
+    </aside>
+  </div>
+</div>

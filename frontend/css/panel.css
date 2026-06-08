@@ -1,0 +1,164 @@
+/* ============================================================
+   gesCasesRurals - Client Dashboard CSS
+   ============================================================ */
+
+.panel-wrapper {
+  padding: 48px 0;
+}
+
+.panel-header-block {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  background-image: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.panel-welcome h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.panel-welcome p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+/* Tabs */
+.panel-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 32px;
+}
+
+.panel-tab {
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: var(--transition-fast);
+}
+
+.panel-tab:hover {
+  color: var(--primary-light);
+}
+
+.panel-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Booking Row/Card */
+.my-booking-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  transition: var(--transition-normal);
+}
+
+.my-booking-card:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.my-booking-img {
+  width: 100%;
+  height: 120px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.my-booking-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.my-booking-house-name {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.my-booking-dates {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.my-booking-dates i {
+  color: var(--accent);
+}
+
+.my-booking-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.my-booking-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.my-booking-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Profile Form Layout */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+.profile-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-security-info {
+  background-color: hsl(var(--primary-h), var(--primary-s), 97%);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  font-size: 0.9rem;
+}
+
+.profile-security-info h4 {
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.profile-security-info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--text-muted);
+  list-style-type: disc;
+  padding-left: 20px;
+}

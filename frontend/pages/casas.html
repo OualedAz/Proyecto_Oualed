@@ -1,0 +1,85 @@
+<div class="container section-padding">
+  <div style="text-align: center; margin-bottom: 50px;">
+    <h1 class="section-title" style="margin-bottom:12px;">Explora Nuestras Casas Rurales</h1>
+    <p class="section-subtitle" style="margin-bottom:0;">Filtra por capacidad, precio y servicios para encontrar tu alojamiento ideal.</p>
+  </div>
+  
+  <div class="catalog-layout">
+    <!-- Filter Sidebar -->
+    <aside class="filter-sidebar">
+      <div class="filter-title">
+        <span><i class="fa-solid fa-sliders"></i> Filtros</span>
+        <button class="btn btn-secondary admin-btn-sm" id="clear-filters-btn" style="padding: 2px 8px; font-size: 0.75rem;">Limpiar</button>
+      </div>
+      
+      <!-- Text Search -->
+      <div class="filter-group">
+        <label class="filter-group-title" for="filter-text">Buscar por Nombre</label>
+        <input type="text" class="form-control" id="filter-text" placeholder="Ej: Can Roure...">
+      </div>
+      
+      <!-- Price range -->
+      <div class="filter-group">
+        <div class="filter-group-title" style="display:flex; justify-content:space-between;">
+          <span>Precio Max/Noche</span>
+          <span id="price-val-indicator" style="font-weight:700; color:var(--primary);">250€</span>
+        </div>
+        <input type="range" min="40" max="250" step="5" value="250" class="form-control" id="filter-price" style="padding:0; margin-top:8px;">
+      </div>
+
+      <!-- Capacity selector -->
+      <div class="filter-group">
+        <label class="filter-group-title" for="filter-capacity">Capacidad Mínima</label>
+        <select class="form-control" id="filter-capacity">
+          <option value="1">Cualquier capacidad</option>
+          <option value="2">2+ personas</option>
+          <option value="4">4+ personas</option>
+          <option value="6">6+ personas</option>
+          <option value="8">8+ personas</option>
+          <option value="10">10+ personas</option>
+        </select>
+      </div>
+      
+      <!-- Amenities list -->
+      <div class="filter-group">
+        <span class="filter-group-title">Servicios Incluidos</span>
+        <div class="filter-checkbox-list" style="margin-top: 10px;">
+          <label class="filter-checkbox-item">
+            <input type="checkbox" name="services" value="WiFi"> WiFi
+          </label>
+          <label class="filter-checkbox-item">
+            <input type="checkbox" name="services" value="Barbacoa"> Barbacoa
+          </label>
+          <label class="filter-checkbox-item">
+            <input type="checkbox" name="services" value="Piscina"> Piscina
+          </label>
+          <label class="filter-checkbox-item">
+            <input type="checkbox" name="services" value="Jardín"> Jardín
+          </label>
+          <label class="filter-checkbox-item">
+            <input type="checkbox" name="services" value="Chimenea"> Chimenea
+          </label>
+          <label class="filter-checkbox-item">
+            <input type="checkbox" name="services" value="Spa"> Spa / Jacuzzi
+          </label>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Catalog Grid -->
+    <section>
+      <div class="featured-grid" id="catalog-houses-list">
+        <!-- Dynamically populated via JS -->
+        <div style="grid-column: span 3; text-align: center; padding: 100px;">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
+        </div>
+      </div>
+      
+      <div class="hidden text-center" id="catalog-empty-state" style="padding: 60px 0;">
+        <i class="fa-solid fa-house-circle-xmark" style="font-size: 4rem; color: var(--text-muted); opacity: 0.5; margin-bottom: 20px;"></i>
+        <h3>No se encontraron casas rurales</h3>
+        <p style="color: var(--text-muted); margin-top: 8px;">Intente ajustar los filtros de búsqueda o pruebe de nuevo.</p>
+      </div>
+    </section>
+  </div>
+</div>
