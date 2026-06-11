@@ -11,8 +11,8 @@ window.api = {
     // Set headers
     const headers = options.headers || {};
     
-    // Auto-inject JWT token if available in localStorage
-    const token = localStorage.getItem('token');
+    // Auto-inject JWT token if available in sessionStorage
+    const token = sessionStorage.getItem('token');
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }

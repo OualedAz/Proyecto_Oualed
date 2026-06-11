@@ -7,8 +7,8 @@ window.auth = {
 
   init() {
     // Check if token and user info are stored
-    const token = localStorage.getItem('token');
-    const userStr = localStorage.getItem('user');
+    const token = sessionStorage.getItem('token');
+    const userStr = sessionStorage.getItem('user');
 
     if (token && userStr) {
       try {
@@ -27,8 +27,8 @@ window.auth = {
       const response = await window.api.post('/auth/login', { email, password });
       
       // Save session credentials
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      sessionStorage.setItem('token', response.token);
+      sessionStorage.setItem('user', JSON.stringify(response.user));
       this.currentUser = response.user;
 
       this.updateNavbarUI();
@@ -62,8 +62,8 @@ window.auth = {
   },
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     this.currentUser = null;
     
     // Stop notifications polling

@@ -81,7 +81,7 @@ window.notifications = {
         item.innerHTML = `
           ${notif.leida ? '' : '<div class="notif-item-dot"></div>'}
           <div style="flex-grow:1;">
-            <p>${window.utils.sanitizeHTML(notif.mensaje)}</p>
+            <p>${notif.mensaje}</p>
             <span style="font-size:0.75rem; color:var(--text-muted); display:block; margin-top:4px;">
               ${window.utils.formatDate(notif.fecha)}
             </span>

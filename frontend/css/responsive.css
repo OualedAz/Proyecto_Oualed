@@ -113,8 +113,70 @@
   .contact-layout {
     grid-template-columns: 1fr;
   }
-  
-  .profile-grid {
+    .profile-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Payment page responsive layout stacking */
+  .pago-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Admin tables scrollable wrapper */
+  .admin-table-container,
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+  }
+
+  .admin-table-container table,
+  .table-wrapper table {
+    min-width: 600px;
+  }
+}
+
+/* Small mobile devices (< 480px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .pago-title {
+    font-size: 1.7rem;
+  }
+
+  .pago-summary-card,
+  .pago-form-card {
+    padding: 20px;
+  }
+
+  .pago-form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .pago-detail-value {
+    max-width: 50%;
+  }
+
+  .my-booking-details {
+    padding: 16px;
+  }
+
+  .auth-card {
+    padding: 24px 16px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.95rem;
   }
 }

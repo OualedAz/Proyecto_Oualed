@@ -83,7 +83,7 @@ class ReservaService {
       throw new Error('No se puede aprobar. Hay un solapamiento con otra reserva ya aceptada.');
     }
 
-    const success = await Reserva.updateEstado(reservaId, 'aceptada', adminId);
+    const success = await Reserva.updateEstado(reservaId, 'aprobada_pendiente_pago', adminId);
     return success;
   }
 }

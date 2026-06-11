@@ -6,7 +6,7 @@ class Reserva {
       SELECT id, fecha_entrada, fecha_salida, estado 
       FROM reservas 
       WHERE casa_id = ? 
-        AND estado = 'aceptada'
+        AND estado IN ('aceptada', 'aprobada_pendiente_pago')
         AND (fecha_entrada < ? AND fecha_salida > ?)
     `;
     const params = [casaId, fechaSalida, fechaEntrada];
@@ -92,7 +92,7 @@ class Reserva {
     const sql = `
       SELECT fecha_entrada, fecha_salida 
       FROM reservas 
-      WHERE casa_id = ? AND estado = 'aceptada' AND fecha_salida >= CURRENT_DATE()
+      WHERE casa_id = ? AND estado IN ('aceptada', 'aprobada_pendiente_pago') AND fecha_salida >= CURRENT_DATE()
       ORDER BY fecha_entrada ASC
     `;
     const [rows] = await db.query(sql, [casaId]);

@@ -9,7 +9,8 @@ const routes = {
   '/login': { template: '/pages/login.html', auth: false, admin: false, init: () => initLoginView() },
   '/registro': { template: '/pages/registro.html', auth: false, admin: false, init: () => initRegisterView() },
   '/panel': { template: '/pages/panel.html', auth: true, admin: false, init: () => initPanelView() },
-  '/admin': { template: '/pages/admin.html', auth: true, admin: true, init: () => window.adminPage && window.adminPage.init() }
+  '/admin': { template: '/pages/admin.html', auth: true, admin: true, init: () => window.adminPage && window.adminPage.init() },
+  '/pago/:id': { template: '/pages/pago.html', auth: true, admin: false, init: (id) => initPagoView(id) }
 };
 
 class Router {
@@ -29,6 +30,9 @@ class Router {
     if (path.startsWith('/casas/') && path.split('/').length === 3) {
       paramId = path.split('/')[2];
       matchedRoute = routes['/casas/:id'];
+    } else if (path.startsWith('/pago/') && path.split('/').length === 3) {
+      paramId = path.split('/')[2];
+      matchedRoute = routes['/pago/:id'];
     } else {
       matchedRoute = routes[path] || routes['/']; // Default fallback to home
     }
@@ -265,12 +269,12 @@ async function initPanelView() {
       try {
         await window.api.put('/auth/profile', updatedData);
         
-        // Update credentials in localStorage
-        const localUser = JSON.parse(localStorage.getItem('user'));
+        // Update credentials in sessionStorage
+        const localUser = JSON.parse(sessionStorage.getItem('user'));
         localUser.nombre = updatedData.nombre;
         localUser.apellidos = updatedData.apellidos;
         localUser.email = updatedData.email;
-        localStorage.setItem('user', JSON.stringify(localUser));
+        sessionStorage.setItem('user', JSON.stringify(localUser));
         window.auth.currentUser = localUser;
         window.auth.updateNavbarUI();
 
@@ -331,7 +335,14 @@ async function loadClientReservations() {
         </div>
         <div class="my-booking-actions">
           <div class="my-booking-price">${window.utils.formatCurrency(booking.precio_total)}</div>
-          <span class="status-tag ${booking.estado}">${booking.estado.toUpperCase()}</span>
+          <span class="status-tag ${booking.estado}">
+            ${booking.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : booking.estado.toUpperCase()}
+          </span>
+          ${booking.estado === 'aprobada_pendiente_pago' ? `
+            <a class="btn btn-primary admin-btn-sm" href="#/pago/${booking.id}" style="margin-top: 6px;">
+              Pagar reserva
+            </a>
+          ` : ''}
           ${booking.estado === 'pendiente' ? `
             <button class="btn btn-secondary admin-btn-sm" style="color:var(--danger); border-color:rgba(211,47,47,0.2)" onclick="cancelarReservaCliente(${booking.id})">
               Cancelar solicitud
@@ -359,3 +370,122 @@ window.cancelarReservaCliente = async (id) => {
     window.utils.showToast(err.message, 'error');
   }
 };
+
+// 4. SIMULATED PAYMENT VIEW BINDING
+async function initPagoView(id) {
+  const loading = document.getElementById('pago-loading-state');
+  const errorState = document.getElementById('pago-error-state');
+  const content = document.getElementById('pago-content');
+  const successState = document.getElementById('pago-success-state');
+
+  if (!loading || !errorState || !content) return;
+
+  try {
+    // Fetch reservation details
+    const res = await window.api.get(`/reservas/${id}`);
+    
+    // Check if it's already paid or rejected
+    if (res.estado === 'aceptada') {
+      loading.classList.add('hidden');
+      errorState.classList.remove('hidden');
+      document.getElementById('pago-error-title').textContent = 'Reserva ya pagada';
+      document.getElementById('pago-error-msg').textContent = 'Esta reserva ya ha sido confirmada y pagada anteriormente.';
+      return;
+    }
+    
+    if (res.estado !== 'aprobada_pendiente_pago') {
+      loading.classList.add('hidden');
+      errorState.classList.remove('hidden');
+      document.getElementById('pago-error-title').textContent = 'Estado de reserva no válido';
+      document.getElementById('pago-error-msg').textContent = `No se puede realizar el pago de una reserva en estado: ${res.estado.replace(/_/g, ' ').toUpperCase()}`;
+      return;
+    }
+
+    // Populate data
+    document.getElementById('pago-casa-nombre').textContent = res.casa_nombre;
+    document.getElementById('pago-fecha-entrada').textContent = window.utils.formatDate(res.fecha_entrada);
+    document.getElementById('pago-fecha-salida').textContent = window.utils.formatDate(res.fecha_salida);
+    document.getElementById('pago-personas').textContent = `${res.num_personas} ${res.num_personas === 1 ? 'persona' : 'personas'}`;
+    document.getElementById('pago-observaciones').textContent = res.observaciones ? res.observaciones : 'Ninguna';
+    document.getElementById('pago-total').textContent = window.utils.formatCurrency(res.precio_total);
+
+    // Show content
+    loading.classList.add('hidden');
+    content.classList.remove('hidden');
+
+    // Setup input masks & formatting
+    const numInput = document.getElementById('pago-numero-tarjeta');
+    if (numInput) {
+      numInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+          if (i > 0 && i % 4 === 0) formatted += ' ';
+          formatted += value[i];
+        }
+        e.target.value = formatted;
+      });
+    }
+
+    const expiryInput = document.getElementById('pago-caducidad');
+    if (expiryInput) {
+      expiryInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 2) {
+          e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        } else {
+          e.target.value = value;
+        }
+      });
+    }
+
+    // Form submission
+    const form = document.getElementById('pago-form');
+    const submitBtn = document.getElementById('pago-submit-btn');
+    const errorBanner = document.getElementById('pago-error-banner');
+
+    if (form) {
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        if (errorBanner) errorBanner.style.display = 'none';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Procesando pago...';
+        }
+
+        try {
+          // Simulate network delay
+          await new Promise(resolve => setTimeout(resolve, 1500));
+
+          // Call backend to confirm payment
+          await window.api.put(`/reservas/${id}/confirmar-pago`);
+
+          // Show success
+          content.classList.add('hidden');
+          
+          document.getElementById('pago-success-casa').textContent = res.casa_nombre;
+          document.getElementById('pago-success-fechas').textContent = `${window.utils.formatDate(res.fecha_entrada)} al ${window.utils.formatDate(res.fecha_salida)}`;
+          document.getElementById('pago-success-total').textContent = window.utils.formatCurrency(res.precio_total);
+          
+          successState.classList.remove('hidden');
+          window.utils.showToast('Pago procesado correctamente.', 'success');
+        } catch (err) {
+          if (errorBanner) {
+            errorBanner.textContent = err.message;
+            errorBanner.style.display = 'block';
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Confirmar Pago';
+          }
+        }
+      };
+    }
+
+  } catch (err) {
+    loading.classList.add('hidden');
+    errorState.classList.remove('hidden');
+    document.getElementById('pago-error-title').textContent = 'Error al cargar los detalles';
+    document.getElementById('pago-error-msg').textContent = err.message;
+  }
+}

@@ -531,6 +531,10 @@
   background-color: var(--border-color);
   color: var(--text-muted);
 }
+.status-tag.aprobada_pendiente_pago {
+  background-color: var(--info-light);
+  color: var(--info);
+}
 
 /* Footer */
 .main-footer {

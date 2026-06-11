@@ -70,3 +70,43 @@ INSERT INTO `notificaciones` (`usuario_id`, `mensaje`, `tipo`, `leida`) VALUES
 (1, 'Nueva reserva recibida de Joan Garcia para Can Alzina.', 'nueva_reserva', 0),
 (1, 'Nueva reserva recibida de Anna López para Can Roure.', 'nueva_reserva', 0),
 (1, 'Nueva reserva recibida de Carles Fernández para Can Oliveres.', 'nueva_reserva', 0);
+
+-- IMÁGENES DE CASAS (cada casa tiene imágenes únicas, sin repeticiones entre casas)
+-- Casa 1: Can Noguer (masía rodeada de bosque)
+INSERT INTO `imagenes_casas` (`casa_id`, `ruta`, `es_principal`, `orden`) VALUES
+(1, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80', 1, 0),
+(1, 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', 0, 1),
+(1, 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', 0, 2),
+(1, 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80', 0, 3);
+
+-- Casa 2: Can Alzina (casa de piedra con vistas al valle)
+INSERT INTO `imagenes_casas` (`casa_id`, `ruta`, `es_principal`, `orden`) VALUES
+(2, 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80', 1, 0),
+(2, 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80', 0, 1),
+(2, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80', 0, 2);
+
+-- Casa 3: Can Puigdomènech (masía señorial con piscina)
+INSERT INTO `imagenes_casas` (`casa_id`, `ruta`, `es_principal`, `orden`) VALUES
+(3, 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80', 1, 0),
+(3, 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80', 0, 1),
+(3, 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=80', 0, 2),
+(3, 'https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?auto=format&fit=crop&w=800&q=80', 0, 3);
+
+-- Casa 4: Can Roure (casa rural rústica con huerto)
+INSERT INTO `imagenes_casas` (`casa_id`, `ruta`, `es_principal`, `orden`) VALUES
+(4, 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80', 1, 0),
+(4, 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=800&q=80', 0, 1),
+(4, 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80', 0, 2);
+
+-- Casa 5: Can Oliveres (lujosa con spa)
+INSERT INTO `imagenes_casas` (`casa_id`, `ruta`, `es_principal`, `orden`) VALUES
+(5, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80', 1, 0),
+(5, 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=800&q=80', 0, 1),
+(5, 'https://images.unsplash.com/photo-1584738766473-61c083514bf4?auto=format&fit=crop&w=800&q=80', 0, 2),
+(5, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', 0, 3);
+
+-- Casa 6: La Barraca del Riu (junto al río)
+INSERT INTO `imagenes_casas` (`casa_id`, `ruta`, `es_principal`, `orden`) VALUES
+(6, 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=80', 1, 0),
+(6, 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=800&q=80', 0, 1),
+(6, 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80', 0, 2);

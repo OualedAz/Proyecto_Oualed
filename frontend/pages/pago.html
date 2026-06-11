@@ -1,0 +1,134 @@
+<section class="section-padding" style="min-height: 80vh;">
+  <div class="container">
+    <!-- Loading State -->
+    <div id="pago-loading-state">
+      <div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="pago-error-state" class="hidden">
+      <div class="text-center" style="padding: 60px 0;">
+        <i class="fa-solid fa-circle-exclamation" style="font-size: 4rem; color: var(--danger); margin-bottom: 16px;"></i>
+        <h2 id="pago-error-title">Error</h2>
+        <p id="pago-error-msg" style="color:var(--text-muted); margin-top:8px;"></p>
+        <a href="#/panel" class="btn btn-primary" style="margin-top: 20px;">Volver a Mi Panel</a>
+      </div>
+    </div>
+
+    <!-- Payment Content -->
+    <div id="pago-content" class="hidden">
+      <!-- Header -->
+      <div class="pago-header">
+        <div class="pago-header-icon">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+        <h1 class="pago-title">Pasarela de Pago</h1>
+        <p class="pago-subtitle">Completa el pago para confirmar tu reserva</p>
+      </div>
+
+      <div class="pago-layout">
+        <!-- Left: Reservation Summary -->
+        <div class="pago-summary-card">
+          <h3 class="pago-card-title"><i class="fa-solid fa-house-chimney"></i> Resumen de la Reserva</h3>
+          
+          <div class="pago-detail-row">
+            <span class="pago-detail-label">Casa Rural</span>
+            <span class="pago-detail-value" id="pago-casa-nombre">—</span>
+          </div>
+          <div class="pago-detail-row">
+            <span class="pago-detail-label">Fecha de Entrada</span>
+            <span class="pago-detail-value" id="pago-fecha-entrada">—</span>
+          </div>
+          <div class="pago-detail-row">
+            <span class="pago-detail-label">Fecha de Salida</span>
+            <span class="pago-detail-value" id="pago-fecha-salida">—</span>
+          </div>
+          <div class="pago-detail-row">
+            <span class="pago-detail-label">Nº Personas</span>
+            <span class="pago-detail-value" id="pago-personas">—</span>
+          </div>
+          <div class="pago-detail-row">
+            <span class="pago-detail-label">Observaciones</span>
+            <span class="pago-detail-value" id="pago-observaciones">—</span>
+          </div>
+
+          <div class="pago-total-row">
+            <span>Total a Pagar</span>
+            <span id="pago-total">—</span>
+          </div>
+
+          <div class="pago-secure-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Pago 100% seguro y encriptado</span>
+          </div>
+        </div>
+
+        <!-- Right: Payment Form -->
+        <div class="pago-form-card">
+          <h3 class="pago-card-title"><i class="fa-solid fa-lock"></i> Datos de Pago</h3>
+
+          <form id="pago-form">
+            <div class="form-group">
+              <label class="form-label" for="pago-titular">Nombre del Titular</label>
+              <input type="text" class="form-control" id="pago-titular" placeholder="Ej: Joan Garcia Roca" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="pago-numero-tarjeta">Número de Tarjeta</label>
+              <div class="pago-card-input-wrapper">
+                <input type="text" class="form-control" id="pago-numero-tarjeta" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                <div class="pago-card-icons">
+                  <i class="fa-brands fa-cc-visa"></i>
+                  <i class="fa-brands fa-cc-mastercard"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="pago-form-row">
+              <div class="form-group">
+                <label class="form-label" for="pago-caducidad">Fecha de Caducidad</label>
+                <input type="text" class="form-control" id="pago-caducidad" placeholder="MM/AA" maxlength="5" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="pago-cvv">CVV</label>
+                <input type="text" class="form-control" id="pago-cvv" placeholder="123" maxlength="4" required>
+              </div>
+            </div>
+
+            <div id="pago-error-banner" class="form-error-banner" style="display:none;"></div>
+
+            <button type="submit" class="btn btn-primary pago-submit-btn" id="pago-submit-btn">
+              <i class="fa-solid fa-lock"></i> Confirmar Pago
+            </button>
+          </form>
+
+          <p class="pago-disclaimer">
+            <i class="fa-solid fa-info-circle"></i>
+            Esta es una pasarela de pago simulada. No se realizará ningún cargo real.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="pago-success-state" class="hidden">
+      <div class="pago-success-container">
+        <div class="pago-success-icon">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2>¡Pago Confirmado!</h2>
+        <p>Tu reserva ha sido confirmada exitosamente. Recibirás una notificación con los detalles.</p>
+        <div class="pago-success-details">
+          <p><strong>Casa:</strong> <span id="pago-success-casa">—</span></p>
+          <p><strong>Fechas:</strong> <span id="pago-success-fechas">—</span></p>
+          <p><strong>Total pagado:</strong> <span id="pago-success-total">—</span></p>
+        </div>
+        <a href="#/panel" class="btn btn-primary" style="margin-top: 24px;">
+          <i class="fa-solid fa-arrow-left"></i> Volver a Mi Panel
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

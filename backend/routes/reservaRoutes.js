@@ -22,4 +22,7 @@ router.put('/:id/aprobar', verifyToken, isAdmin, reservaController.aprobar);
 router.put('/:id/rechazar', verifyToken, isAdmin, reservaController.rechazar);
 router.put('/:id/cancelar', verifyToken, reservaController.cancelar);
 
+// Client payment confirmation
+router.put('/:id/confirmar-pago', verifyToken, reservaController.confirmarPago);
+
 module.exports = router;

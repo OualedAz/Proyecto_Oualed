@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `fecha_salida` DATE NOT NULL,
   `num_personas` INT NOT NULL DEFAULT 1,
   `precio_total` DECIMAL(10,2) NOT NULL DEFAULT 0,
-  `estado` ENUM('pendiente','aceptada','rechazada','cancelada') NOT NULL DEFAULT 'pendiente',
+  `estado` ENUM('pendiente','aprobada_pendiente_pago','aceptada','rechazada','cancelada') NOT NULL DEFAULT 'pendiente',
   `observaciones` TEXT DEFAULT NULL,
   `fecha_reserva` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_gestion` DATETIME DEFAULT NULL,

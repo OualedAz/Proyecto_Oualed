@@ -115,7 +115,7 @@ window.adminPage = {
             <td>${window.utils.sanitizeHTML(res.casa_nombre)}</td>
             <td>${window.utils.formatDate(res.fecha_entrada)} - ${window.utils.formatDate(res.fecha_salida)}</td>
             <td><strong>${window.utils.formatCurrency(res.precio_total)}</strong></td>
-            <td><span class="status-tag ${res.estado}">${res.estado.toUpperCase()}</span></td>
+            <td><span class="status-tag ${res.estado}">${res.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : res.estado.toUpperCase()}</span></td>
           `;
           tbodyReservas.appendChild(tr);
         });
@@ -169,7 +169,7 @@ window.adminPage = {
         <td>${window.utils.formatDate(res.fecha_salida)}</td>
         <td class="text-center">${res.num_personas}</td>
         <td><strong>${window.utils.formatCurrency(res.precio_total)}</strong></td>
-        <td><span class="status-tag ${res.estado}">${res.estado.toUpperCase()}</span></td>
+        <td><span class="status-tag ${res.estado}">${res.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : res.estado.toUpperCase()}</span></td>
         <td class="admin-actions-cell">
           <button class="btn btn-secondary admin-btn-sm" onclick="window.adminPage.openBookingDetailModal(${res.id})">
             <i class="fa-solid fa-eye"></i> Detalles
@@ -195,7 +195,7 @@ window.adminPage = {
     
     const tag = document.getElementById('admin-modal-book-status');
     tag.className = `status-tag ${res.estado}`;
-    tag.textContent = res.estado.toUpperCase();
+    tag.textContent = res.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : res.estado.toUpperCase();
 
     // Render footer action buttons dynamically
     const footer = document.getElementById('admin-booking-modal-footer');
@@ -205,6 +205,10 @@ window.adminPage = {
       footer.innerHTML = `
         <button class="btn btn-danger" onclick="window.adminPage.manageBookingAction(${id}, 'rechazar')">Rechazar</button>
         <button class="btn btn-primary" onclick="window.adminPage.manageBookingAction(${id}, 'aprobar')">Aprobar Reserva</button>
+      `;
+    } else if (res.estado === 'aprobada_pendiente_pago') {
+      footer.innerHTML = `
+        <button class="btn btn-danger" onclick="window.adminPage.manageBookingAction(${id}, 'cancelar')">Cancelar Aprobación</button>
       `;
     } else if (res.estado === 'aceptada') {
       footer.innerHTML = `

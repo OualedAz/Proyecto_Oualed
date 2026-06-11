@@ -103,26 +103,68 @@ exports.aprobar = async (req, res) => {
     await ReservaService.aprobarReserva(id, adminId);
     const reserva = await Reserva.getById(id);
 
-    // Notify the client
+    // Notify the client with a payment link
     await Notificacion.create({
       usuario_id: reserva.usuario_id,
-      mensaje: `¡Buenas noticias! Tu reserva para la casa rural "${reserva.casa_nombre}" desde el ${reserva.fecha_entrada} hasta el ${reserva.fecha_salida} ha sido APROBADA.`,
-      tipo: 'reserva_aceptada'
+      mensaje: `¡Buenas noticias! Tu reserva para "${reserva.casa_nombre}" ha sido aprobada. Completa el pago para confirmarla: <a href="#/pago/${id}">Ir a la pasarela de pago</a>`,
+      tipo: 'reserva_aprobada_pago'
     });
 
     // Log admin action
     await LogAdmin.create({
       admin_id: adminId,
-      accion: `Aprobada reserva ID ${id} para la casa: ${reserva.casa_nombre}`,
+      accion: `Aprobada reserva ID ${id} para la casa: ${reserva.casa_nombre} (pendiente de pago)`,
       tabla_afectada: 'reservas',
       registro_id: id,
       ip: req.ip
     });
 
-    res.json({ message: 'Reserva aprobada correctamente.' });
+    res.json({ message: 'Reserva aprobada correctamente. El cliente recibirá una notificación para realizar el pago.' });
   } catch (err) {
     console.error('Error approving reservation:', err.message);
     res.status(400).json({ error: err.message });
+  }
+};
+
+exports.confirmarPago = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    const reserva = await Reserva.getById(id);
+    if (!reserva) {
+      return res.status(404).json({ error: 'La reserva no existe.' });
+    }
+
+    // Only the owner of the reservation can confirm payment
+    if (reserva.usuario_id !== userId) {
+      return res.status(403).json({ error: 'Permiso denegado. No puede confirmar el pago de la reserva de otro usuario.' });
+    }
+
+    if (reserva.estado !== 'aprobada_pendiente_pago') {
+      return res.status(400).json({ error: `No se puede confirmar el pago de una reserva en estado: ${reserva.estado}` });
+    }
+
+    await Reserva.updateEstado(id, 'aceptada');
+
+    // Notify the client
+    await Notificacion.create({
+      usuario_id: userId,
+      mensaje: `¡Pago confirmado! Tu reserva para "${reserva.casa_nombre}" del ${reserva.fecha_entrada} al ${reserva.fecha_salida} está confirmada. ¡Nos vemos pronto!`,
+      tipo: 'reserva_aceptada'
+    });
+
+    // Notify admin
+    await Notificacion.create({
+      usuario_id: 1,
+      mensaje: `El cliente ha completado el pago de la reserva ID ${id} para "${reserva.casa_nombre}".`,
+      tipo: 'admin_alerta'
+    });
+
+    res.json({ message: 'Pago confirmado y reserva aceptada correctamente.' });
+  } catch (err) {
+    console.error('Error confirming payment:', err.message);
+    res.status(500).json({ error: 'Error al confirmar el pago.' });
   }
 };
 
