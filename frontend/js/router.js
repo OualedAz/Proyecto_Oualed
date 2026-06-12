@@ -385,7 +385,7 @@ async function initPagoView(id) {
     const res = await window.api.get(`/reservas/${id}`);
     
     // Check if it's already paid or rejected
-    if (res.estado === 'aceptada') {
+    if (res.estado === 'confirmada') {
       loading.classList.add('hidden');
       errorState.classList.remove('hidden');
       document.getElementById('pago-error-title').textContent = 'Reserva ya pagada';

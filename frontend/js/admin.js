@@ -115,7 +115,7 @@ window.adminPage = {
             <td>${window.utils.sanitizeHTML(res.casa_nombre)}</td>
             <td>${window.utils.formatDate(res.fecha_entrada)} - ${window.utils.formatDate(res.fecha_salida)}</td>
             <td><strong>${window.utils.formatCurrency(res.precio_total)}</strong></td>
-            <td><span class="status-tag ${res.estado}">${res.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : res.estado.toUpperCase()}</span></td>
+            <td><span class="status-tag ${res.estado}">${res.estado === 'aprobada_pendiente_pago' ? 'APROBADA POR PROPIETARIO' : res.estado.toUpperCase()}</span></td>
           `;
           tbodyReservas.appendChild(tr);
         });
@@ -169,7 +169,7 @@ window.adminPage = {
         <td>${window.utils.formatDate(res.fecha_salida)}</td>
         <td class="text-center">${res.num_personas}</td>
         <td><strong>${window.utils.formatCurrency(res.precio_total)}</strong></td>
-        <td><span class="status-tag ${res.estado}">${res.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : res.estado.toUpperCase()}</span></td>
+        <td><span class="status-tag ${res.estado}">${res.estado === 'aprobada_pendiente_pago' ? 'APROBADA POR PROPIETARIO' : res.estado.toUpperCase()}</span></td>
         <td class="admin-actions-cell">
           <button class="btn btn-secondary admin-btn-sm" onclick="window.adminPage.openBookingDetailModal(${res.id})">
             <i class="fa-solid fa-eye"></i> Detalles
@@ -195,7 +195,7 @@ window.adminPage = {
     
     const tag = document.getElementById('admin-modal-book-status');
     tag.className = `status-tag ${res.estado}`;
-    tag.textContent = res.estado === 'aprobada_pendiente_pago' ? 'PENDIENTE DE PAGO' : res.estado.toUpperCase();
+    tag.textContent = res.estado === 'aprobada_pendiente_pago' ? 'APROBADA POR PROPIETARIO' : res.estado.toUpperCase();
 
     // Render footer action buttons dynamically
     const footer = document.getElementById('admin-booking-modal-footer');
@@ -210,7 +210,7 @@ window.adminPage = {
       footer.innerHTML = `
         <button class="btn btn-danger" onclick="window.adminPage.manageBookingAction(${id}, 'cancelar')">Cancelar Aprobación</button>
       `;
-    } else if (res.estado === 'aceptada') {
+    } else if (res.estado === 'confirmada') {
       footer.innerHTML = `
         <button class="btn btn-danger" onclick="window.adminPage.manageBookingAction(${id}, 'cancelar')">Cancelar Reserva</button>
       `;
@@ -261,7 +261,7 @@ window.adminPage = {
         <td><strong>${window.utils.formatCurrency(c.precio)}</strong></td>
         <td>${c.num_habitaciones} hab. / ${c.num_banos} baños</td>
         <td>${c.metros ? `${c.metros} m²` : '-'}</td>
-        <td><span class="status-tag ${c.estado === 'activa' ? 'aceptada' : c.estado === 'inactiva' ? 'cancelada' : 'pendiente'}">${c.estado.toUpperCase()}</span></td>
+        <td><span class="status-tag ${c.estado === 'activa' ? 'confirmada' : c.estado === 'inactiva' ? 'cancelada' : 'pendiente'}">${c.estado.toUpperCase()}</span></td>
         <td class="admin-actions-cell">
           <button class="btn btn-secondary admin-btn-sm" onclick="window.adminPage.openHouseEditModal(${c.id})">
             <i class="fa-solid fa-pen-to-square"></i>
@@ -428,7 +428,7 @@ window.adminPage = {
         <td>${window.utils.sanitizeHTML(u.email)}</td>
         <td>${window.utils.sanitizeHTML(u.telefono || '-')}</td>
         <td>${roleSelector}</td>
-        <td><span class="status-tag ${u.estado === 'activo' ? 'aceptada' : u.estado === 'inactivo' ? 'cancelada' : 'rechazada'}">${u.estado.toUpperCase()}</span></td>
+        <td><span class="status-tag ${u.estado === 'activo' ? 'confirmada' : u.estado === 'inactivo' ? 'cancelada' : 'rechazada'}">${u.estado.toUpperCase()}</span></td>
         <td class="admin-actions-cell">${lockBtn}</td>
       `;
       tbody.appendChild(tr);

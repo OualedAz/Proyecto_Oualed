@@ -145,13 +145,13 @@ exports.confirmarPago = async (req, res) => {
       return res.status(400).json({ error: `No se puede confirmar el pago de una reserva en estado: ${reserva.estado}` });
     }
 
-    await Reserva.updateEstado(id, 'aceptada');
+    await Reserva.updateEstado(id, 'confirmada');
 
     // Notify the client
     await Notificacion.create({
       usuario_id: userId,
       mensaje: `¡Pago confirmado! Tu reserva para "${reserva.casa_nombre}" del ${reserva.fecha_entrada} al ${reserva.fecha_salida} está confirmada. ¡Nos vemos pronto!`,
-      tipo: 'reserva_aceptada'
+      tipo: 'reserva_confirmada'
     });
 
     // Notify admin

@@ -120,7 +120,7 @@ Para acceder a las distintas secciones, puedes usar las siguientes cuentas de pr
 
 * **Administrador Principal (Dashboard y Calendario Gantt)**:
   * **Email**: `admin@gescasesrurals.com`
-  * **Contraseña**: `Test1234!`
+  * **Contraseña**: `123456`
 * **Cliente Semilla (Para realizar nuevas reservas)**:
   * **Email**: `joan@email.com`
   * **Contraseña**: `Test1234!`

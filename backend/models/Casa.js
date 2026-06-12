@@ -3,9 +3,12 @@ const db = require('../config/db');
 class Casa {
   static async getAll(filterEstado = null) {
     let sql = `
-      SELECT c.*, i.ruta AS imagen_principal
+      SELECT c.*, 
+        COALESCE(
+          (SELECT ruta FROM imagenes_casas WHERE casa_id = c.id AND es_principal = 1 LIMIT 1),
+          (SELECT ruta FROM imagenes_casas WHERE casa_id = c.id ORDER BY orden ASC, id ASC LIMIT 1)
+        ) AS imagen_principal
       FROM casas c
-      LEFT JOIN imagenes_casas i ON c.id = i.casa_id AND i.es_principal = 1
     `;
     
     const params = [];
