@@ -78,7 +78,7 @@
       </div>
       
       <!-- Recent tables layout -->
-      <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap: 30px;">
+      <div class="admin-recent-grid">
         <!-- Recent Reservations -->
         <div class="admin-table-container" style="margin-bottom:0;">
           <div class="admin-table-header">
@@ -334,7 +334,7 @@
         <p id="admin-modal-book-dates" style="font-weight:600; color:var(--text-main);"><i class="fa-solid fa-calendar"></i> 10/06/2026 - 15/06/2026</p>
       </div>
       
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+      <div class="admin-grid-2col" style="margin-bottom:20px;">
         <div>
           <label class="form-label">Cliente</label>
           <p id="admin-modal-book-user">Joan Garcia</p>
@@ -345,7 +345,7 @@
         </div>
       </div>
       
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+      <div class="admin-grid-2col" style="margin-bottom:20px;">
         <div>
           <label class="form-label">Personas</label>
           <p id="admin-modal-book-guests">5 personas</p>
@@ -361,7 +361,7 @@
         <p id="admin-modal-book-obs" style="font-style:italic; color:var(--text-muted); background:var(--bg-color); padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">Ninguna</p>
       </div>
       
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+      <div class="admin-grid-2col">
         <div>
           <label class="form-label">Fecha Solicitud</label>
           <p id="admin-modal-book-created">01/06/2026</p>
@@ -401,7 +401,7 @@
           <textarea class="form-control form-textarea" id="house-description" required style="min-height: 80px;"></textarea>
         </div>
         
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+        <div class="admin-grid-2col">
           <div class="form-group">
             <label class="form-label" for="house-capacidad">Capacidad Máxima</label>
             <input type="number" class="form-control" id="house-capacidad" min="1" required>
@@ -412,7 +412,7 @@
           </div>
         </div>
         
-        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px;">
+        <div class="admin-grid-3col">
           <div class="form-group">
             <label class="form-label" for="house-rooms">Habitaciones</label>
             <input type="number" class="form-control" id="house-rooms" min="1" value="2">
@@ -427,7 +427,7 @@
           </div>
         </div>
         
-        <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:16px;">
+        <div class="admin-grid-1-5col">
           <div class="form-group">
             <label class="form-label" for="house-services">Servicios (Separados por comas)</label>
             <input type="text" class="form-control" id="house-services" placeholder="WiFi, Barbacoa, Piscina">

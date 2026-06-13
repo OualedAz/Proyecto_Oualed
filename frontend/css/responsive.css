@@ -34,12 +34,32 @@
     margin-top: 30px;
   }
 
-  .admin-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
+  /* Layout Padding & Negative margins for full-width elements */
+  .main-container, section, main {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .hero-section,
+  .testimonials-section,
+  .admin-layout {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+  }
+
+  section[style*="background-color"] {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    border-radius: 0;
+  }
+
+  .admin-content {
+    padding: 24px 16px !important;
+  }
+
   /* Header & Navigation */
   .mobile-menu-toggle {
     display: block;
@@ -140,10 +160,6 @@
   .admin-sidebar {
     display: none; /* Can toggle in JS */
   }
-
-  .admin-stats-grid {
-    grid-template-columns: 1fr;
-  }
   
   .my-booking-card {
     grid-template-columns: 1fr;
@@ -172,8 +188,7 @@
   }
 
   /* Admin tables scrollable wrapper */
-  .admin-table-container,
-  .table-wrapper {
+  .admin-table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-bottom: 1rem;
@@ -181,9 +196,24 @@
     border-radius: var(--radius-md);
   }
 
-  .admin-table-container table,
-  .table-wrapper table {
-    min-width: 600px;
+  .admin-table-wrapper table {
+    min-width: 800px;
+  }
+
+  /* Admin Dashboard Stacking */
+  .admin-recent-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Extra small mobile/tablet grid stacking */
+@media (max-width: 576px) {
+  .admin-grid-2col,
+  .admin-grid-3col,
+  .admin-grid-1-5col {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
   }
 }
 
