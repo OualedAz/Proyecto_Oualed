@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://TU-BACKEND.up.railway.app/api/:path*"
+      "destination": "proyectooualed-production.up.railway.app"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://TU-BACKEND.up.railway.app/uploads/:path*"
+      "destination": "proyectooualed-production.up.railway.app"
     },
     {
       "source": "/(.*)",
