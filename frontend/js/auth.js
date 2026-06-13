@@ -88,11 +88,18 @@ window.auth = {
     const menuAdmin = document.getElementById('menu-item-admin');
     const notifContainer = document.getElementById('notif-container');
 
+    const mobileGuestLinks = document.querySelector('.mobile-guest-links');
+    const mobileUserLinks = document.querySelector('.mobile-user-links');
+    const mobileAdminLink = document.querySelector('.mobile-user-links .admin-only-link');
+
     if (this.currentUser) {
       // User is logged in
       if (guestButtons) guestButtons.classList.add('hidden');
       if (userDropdown) userDropdown.classList.remove('hidden');
       if (notifContainer) notifContainer.classList.remove('hidden');
+
+      if (mobileGuestLinks) mobileGuestLinks.classList.add('hidden');
+      if (mobileUserLinks) mobileUserLinks.classList.remove('hidden');
 
       // Set initials & name
       const name = this.currentUser.nombre || '';
@@ -105,8 +112,10 @@ window.auth = {
       // Show/hide Admin dashboard link
       if (this.currentUser.rol === 'admin') {
         if (menuAdmin) menuAdmin.classList.remove('hidden');
+        if (mobileAdminLink) mobileAdminLink.classList.remove('hidden');
       } else {
         if (menuAdmin) menuAdmin.classList.add('hidden');
+        if (mobileAdminLink) mobileAdminLink.classList.add('hidden');
       }
 
       // Setup Notification badge
@@ -118,6 +127,9 @@ window.auth = {
       if (guestButtons) guestButtons.classList.remove('hidden');
       if (userDropdown) userDropdown.classList.add('hidden');
       if (notifContainer) notifContainer.classList.add('hidden');
+
+      if (mobileGuestLinks) mobileGuestLinks.classList.remove('hidden');
+      if (mobileUserLinks) mobileUserLinks.classList.add('hidden');
     }
   },
 
@@ -161,6 +173,16 @@ window.auth = {
       const newLogoutBtn = logoutBtn.cloneNode(true);
       logoutBtn.parentNode.replaceChild(newLogoutBtn, logoutBtn);
       newLogoutBtn.addEventListener('click', () => {
+        this.logout();
+      });
+    }
+
+    const mobileLogoutBtn = document.querySelector('.mobile-user-links .logout-link');
+    if (mobileLogoutBtn) {
+      const newMobileLogoutBtn = mobileLogoutBtn.cloneNode(true);
+      mobileLogoutBtn.parentNode.replaceChild(newMobileLogoutBtn, mobileLogoutBtn);
+      newMobileLogoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         this.logout();
       });
     }

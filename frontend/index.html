@@ -39,6 +39,20 @@
       <nav class="nav-menu" id="nav-links">
         <a href="#/" class="nav-link active" data-route="home">Inicio</a>
         <a href="#/casas" class="nav-link" data-route="casas">Casas Rurales</a>
+        
+        <!-- Mobile-only Auth Links -->
+        <div class="mobile-auth-links">
+          <div class="mobile-guest-links">
+            <a href="#/login" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">Ingresar</a>
+            <a href="#/registro" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Registrarse</a>
+          </div>
+          <div class="mobile-user-links hidden">
+            <div class="dropdown-divider" style="margin: 15px 0; background-color: var(--border-color); height: 1px;"></div>
+            <a href="#/panel" class="nav-link" style="display: block; margin: 10px 0;"><i class="fa-solid fa-user-gear"></i> Mi Panel de Reservas</a>
+            <a href="#/admin" class="nav-link admin-only-link hidden" style="display: block; margin: 10px 0;"><i class="fa-solid fa-chart-line"></i> Dashboard Admin</a>
+            <a href="#" class="nav-link logout-link" style="display: block; margin: 10px 0; color: var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+          </div>
+        </div>
       </nav>
       
       <!-- User Profile and Actions -->
