@@ -26,7 +26,7 @@ async function importDatabase() {
         multipleStatements: true
       };
       if (process.env.DB_SSL === "true" || url.searchParams.get("ssl") === "true") {
-        connectionConfig.ssl = { rejectUnauthorized: true };
+        connectionConfig.ssl = { rejectUnauthorized: false };
       }
     } catch (err) {
       console.error("Error al parsear la URL de la base de datos:", err.message);
@@ -41,7 +41,7 @@ async function importDatabase() {
       multipleStatements: true
     };
     if (process.env.DB_SSL === "true") {
-      connectionConfig.ssl = { rejectUnauthorized: true };
+      connectionConfig.ssl = { rejectUnauthorized: false };
     }
   }
 

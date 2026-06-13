@@ -20,7 +20,7 @@ if (dbUrl && (dbUrl.startsWith("mysql://") || dbUrl.startsWith("mysql2://") || d
     };
 
     if (process.env.DB_SSL === "true" || url.searchParams.get("ssl") === "true") {
-      poolConfig.ssl = { rejectUnauthorized: true };
+      poolConfig.ssl = { rejectUnauthorized: false };
     }
   } catch (err) {
     console.error("Error parsing DATABASE_URL/MYSQL_URL, falling back to individual variables:", err.message);
@@ -42,7 +42,7 @@ if (!poolConfig) {
 
   // Enable SSL for cloud database connections
   if (process.env.DB_SSL === "true") {
-    poolConfig.ssl = { rejectUnauthorized: true };
+    poolConfig.ssl = { rejectUnauthorized: false };
   }
 }
 
