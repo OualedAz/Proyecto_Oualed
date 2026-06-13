@@ -14,7 +14,7 @@ if (dbUrl && (dbUrl.startsWith("mysql://") || dbUrl.startsWith("mysql2://") || d
       password: decodeURIComponent(url.password),
       database: url.pathname.replace(/^\//, ""),
       waitForConnections: true,
-      connectionLimit: process.env.VERCEL ? 3 : 10,
+      connectionLimit: 10,
       queueLimit: 0,
       timezone: "+00:00",
     };
@@ -35,7 +35,7 @@ if (!poolConfig) {
     password: process.env.DB_PASS || "",
     database: process.env.DB_NAME || "gescasesrurals",
     waitForConnections: true,
-    connectionLimit: process.env.VERCEL ? 3 : 10,
+    connectionLimit: 10,
     queueLimit: 0,
     timezone: "+00:00",
   };

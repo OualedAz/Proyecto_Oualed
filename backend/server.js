@@ -10,13 +10,20 @@ const PORT = process.env.PORT || 3000;
 
 // Security Middlewares
 app.use(helmet({
-  contentSecurityPolicy: false, // Turn off CSP for development to easily pull assets/fonts
+  contentSecurityPolicy: false,
   crossOriginResourcePolicy: false
 }));
 
-// CORS Configuration
+// CORS Configuration — allow frontend origin(s)
+const allowedOrigins = [
+  process.env.FRONTEND_URL,       // Production: https://tu-app.vercel.app
+  'http://localhost:5500',        // VS Code Live Server
+  'http://127.0.0.1:5500',
+  'http://localhost:3000'         // Local dev
+].filter(Boolean);
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: allowedOrigins.length > 0 ? allowedOrigins : '*',
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -36,6 +43,11 @@ app.use(express.urlencoded({ extended: true }));
 // Serve Uploaded Images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Health Check (Railway uses this to verify the service is alive)
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', service: 'gesCasesRurals API', timestamp: new Date().toISOString() });
+});
+
 // Mount API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/casas', require('./routes/casaRoutes'));
@@ -44,26 +56,14 @@ app.use('/api/usuarios', require('./routes/usuarioRoutes'));
 app.use('/api/notificaciones', require('./routes/notificacionRoutes'));
 app.use('/api/stats', require('./routes/statsRoutes'));
 
-// Serve Frontend Static Files
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-// Fallback to index.html for SPA (though hash routing is used, it's nice to have a default)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
   res.status(500).json({ error: 'Ha ocurrido un error inesperado en el servidor.' });
 });
 
-// Export for Vercel serverless, or start server locally
-if (process.env.VERCEL) {
-  module.exports = app;
-} else {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`Access the application at http://localhost:${PORT}`);
-  });
-}
+// Start server
+app.listen(PORT, () => {
+  console.log(`gesCasesRurals API running on port ${PORT}`);
+});
+

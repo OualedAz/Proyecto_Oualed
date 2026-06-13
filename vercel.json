@@ -1,31 +1,17 @@
 {
-  "version": 2,
-  "builds": [
+  "outputDirectory": "frontend",
+  "rewrites": [
     {
-      "src": "api/index.js",
-      "use": "@vercel/node"
+      "source": "/api/:path*",
+      "destination": "https://TU-BACKEND.up.railway.app/api/:path*"
     },
     {
-      "src": "frontend/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
+      "source": "/uploads/:path*",
+      "destination": "https://TU-BACKEND.up.railway.app/uploads/:path*"
     },
     {
-      "src": "/uploads/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/(.*\\.(?:html|css|js|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|json))$",
-      "dest": "/frontend/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
