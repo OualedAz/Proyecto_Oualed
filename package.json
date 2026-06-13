@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "gesCasesRurals - Plataforma de reservas de casas rurales",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
   "engines": {
     "node": ">=18.x"
   },
@@ -19,3 +23,4 @@
     "mysql2": "^3.11.0"
   }
 }
+
